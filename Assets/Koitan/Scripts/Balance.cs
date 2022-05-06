@@ -27,6 +27,8 @@ public class Balance : MonoBehaviour
     {
         float ws = leftWeight.GetWeigth() - rightWeight.GetWeigth();
         angle = Mathf.Lerp(angle, ws * 5, 0.01f);
+        //角度制限
+        angle = Mathf.Clamp(angle, -20, 20);
         // 角度更新
         armTf.rotation = Quaternion.Euler(0, 0, angle);
         leftPlateTf.rotation = Quaternion.Euler(0, 0, 0);

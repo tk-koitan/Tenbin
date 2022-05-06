@@ -25,7 +25,7 @@ public class Weight : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-        if (rb.velocity.magnitude < 1f)
+        if (rb.velocity.magnitude < 2f)
         {
             weight += rb.mass;
         }
