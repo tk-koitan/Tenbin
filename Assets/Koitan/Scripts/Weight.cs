@@ -1,29 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KoitanLib;
 
 public class Weight : MonoBehaviour
 {
-    Rigidbody2D rb;
+    float weight;
     // Start is called before the first frame update
     void Start()
     {
-        TryGetComponent(out rb);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        KoitanDebug.Display($"èdó  = {weight}kg\n");
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void FixedUpdate()
     {
-        Debug.Log(collision.collider.gameObject.name);
+        weight = 0;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log(collision.collider.gameObject.name);
+        Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
+        if (rb.velocity.magnitude < 1f)
+        {
+            weight += rb.mass;
+        }
+    }
+
+    public float GetWeigth()
+    {
+        return weight;
     }
 }
